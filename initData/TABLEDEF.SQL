@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS HSA (
 
 CREATE TABLE IF NOT EXISTS ACCT_HISTORY (
            TRANSACTION_ID              VARCHAR(20)  NOT NULL,
-              ACCOUNT_NUM               VARCHAR(1)  NOT NULL,
+              ACCOUNT_NUM               VARCHAR(10)  NOT NULL,
                      DATE                     DATE  NOT NULL,
                   BALANCE            DECIMAL(10,2)  NOT NULL,
                                     PRIMARY KEY (TRANSACTION_ID),
@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS ACCT_HISTORY (
 
 CREATE TABLE IF NOT EXISTS TRANSACTION (
            TRANSACTION_ID              VARCHAR(20)  NOT NULL,
-              ACCOUNT_NUM               VARCHAR(1)  NOT NULL,
+              ACCOUNT_NUM               VARCHAR(10)  NOT NULL,
           ACCOUNT_BALANCE         INTEGER UNSIGNED  NOT NULL,
             TRANSACT_DATE                     DATE  NOT NULL,
             TRANSACT_TYPE               VARCHAR(3)  NOT NULL,
@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS TRANSACTION (
 CREATE TABLE IF NOT EXISTS PURCHASE (
            TRANSACTION_ID              VARCHAR(20)  NOT NULL,
             INVESTMENT_ID              VARCHAR(20)  NOT NULL,
-              ACCOUNT_NUM               VARCHAR(1)  NOT NULL,
+              ACCOUNT_NUM               VARCHAR(10)  NOT NULL,
                                     PRIMARY KEY (TRANSACTION_ID),
                                  FOREIGN KEY (TRANSACTION_ID)
                        REFERENCES TRANSACTION(TRANSACTION_ID)
@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS PURCHASE (
 CREATE TABLE IF NOT EXISTS WITHDRAWAL (
            TRANSACTION_ID              VARCHAR(20)  NOT NULL,
           AMOUNT_WITHDRAW         INTEGER UNSIGNED  NOT NULL,
-              ACCOUNT_NUM               VARCHAR(1)  NOT NULL,
+              ACCOUNT_NUM               VARCHAR(10)  NOT NULL,
                                     PRIMARY KEY (TRANSACTION_ID),
                                  FOREIGN KEY (TRANSACTION_ID)
                        REFERENCES TRANSACTION(TRANSACTION_ID),
@@ -124,7 +124,7 @@ CREATE TABLE IF NOT EXISTS WITHDRAWAL (
 CREATE TABLE IF NOT EXISTS INVESTMENT (
             INVESTMENT_ID              VARCHAR(20)  NOT NULL,
            TRANSACTION_ID              VARCHAR(20)  NOT NULL,
-              ACCOUNT_NUM               VARCHAR(1)  NOT NULL,
+              ACCOUNT_NUM               VARCHAR(10)  NOT NULL,
                                     PRIMARY KEY (INVESTMENT_ID),
                                   FOREIGN KEY (INVESTMENT_ID)
                       REFERENCES INVEST_SECTOR(INVESTMENT_ID),
@@ -137,7 +137,7 @@ CREATE TABLE IF NOT EXISTS INVESTMENT (
 CREATE TABLE IF NOT EXISTS DIVIDEND (
            TRANSACTION_ID              VARCHAR(20)  NOT NULL,
             INVESTMENT_ID              VARCHAR(20)  NOT NULL,
-              ACCOUNT_NUM               VARCHAR(1)  NOT NULL,
+              ACCOUNT_NUM               VARCHAR(10)  NOT NULL,
                    AMOUNT         INTEGER UNSIGNED  NOT NULL,
                                     PRIMARY KEY (TRANSACTION_ID),
                                  FOREIGN KEY (TRANSACTION_ID)
@@ -152,7 +152,7 @@ CREATE TABLE IF NOT EXISTS SALE (
            TRANSACTION_ID              VARCHAR(20)  NOT NULL,
             INVESTMENT_ID              VARCHAR(20)  NOT NULL,
                    AMOUNT                      INT  NOT NULL,
-              ACCOUNT_NUM               VARCHAR(1)  NOT NULL,
+              ACCOUNT_NUM               VARCHAR(10)  NOT NULL,
                                     PRIMARY KEY (TRANSACTION_ID),
                                  FOREIGN KEY (TRANSACTION_ID)
                        REFERENCES TRANSACTION(TRANSACTION_ID),
@@ -165,7 +165,7 @@ CREATE TABLE IF NOT EXISTS SALE (
 CREATE TABLE IF NOT EXISTS DEPOSIT (
            TRANSACTION_ID              VARCHAR(20)  NOT NULL,
            AMOUNT_DEPOSIT         INTEGER UNSIGNED  NOT NULL,
-              ACCOUNT_NUM               VARCHAR(1)  NOT NULL,
+              ACCOUNT_NUM               VARCHAR(10)  NOT NULL,
                                     PRIMARY KEY (TRANSACTION_ID),
                                  FOREIGN KEY (TRANSACTION_ID)
                        REFERENCES TRANSACTION(TRANSACTION_ID),
@@ -177,8 +177,8 @@ CREATE TABLE IF NOT EXISTS INVEST_HISTORY (
             INVESTMENT_ID              VARCHAR(20)  NOT NULL,
               INVEST_DATE                     DATE  NOT NULL,
                     PRICE       MEDIUMINT UNSIGNED  NOT NULL,
-                 DIVIDEND            DECIMAL(1, 3)  NOT NULL,
-                   TICKER                  CHAR(3)  NOT NULL,
+                 DIVIDEND            DECIMAL(3, 3)  NOT NULL,
+                   TICKER                  CHAR(4)  NOT NULL,
                     UNITS         INTEGER UNSIGNED  NOT NULL,
                                     PRIMARY KEY (INVESTMENT_ID),
                                   FOREIGN KEY (INVESTMENT_ID)
@@ -187,7 +187,7 @@ CREATE TABLE IF NOT EXISTS INVEST_HISTORY (
 
 CREATE TABLE IF NOT EXISTS INVEST_SECTORS (
             INVESTMENT_ID              VARCHAR(20)  NOT NULL,
-                SECTOR_ID               VARCHAR(1)  NOT NULL,
+                SECTOR_ID               VARCHAR(2)  NOT NULL,
                                     PRIMARY KEY (INVESTMENT_ID, SECTOR_ID),
                                   FOREIGN KEY (INVESTMENT_ID)
                          REFERENCES INVESTMENT(INVESTMENT_ID),
@@ -196,9 +196,9 @@ CREATE TABLE IF NOT EXISTS INVEST_SECTORS (
 );
 
 CREATE TABLE IF NOT EXISTS SECTOR (
-                SECTOR_ID               VARCHAR(1)  NOT NULL,
+                SECTOR_ID               VARCHAR(2)  NOT NULL,
               SECTOR_NAME              VARCHAR(30)  NOT NULL,
-                  TAXABLE            DECIMAL(1, 3)  NOT NULL,
+                  TAXABLE            DECIMAL(3, 3)  NOT NULL,
                                     PRIMARY KEY (SECTOR_ID),
                                       FOREIGN KEY (SECTOR_ID)
                           REFERENCES INVEST_SECTOR(SECTOR_ID)
