@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS HSA (
 );
 
 CREATE TABLE IF NOT EXISTS TRANSACTION (
-           TRANSACTION_ID               INT(20) NOT NULL AUTO_INCREMENT,
+           TRANSACTION_ID               INT(20) NOT NULL,
               ACCOUNT_NUM               VARCHAR(10)  NOT NULL,
           ACCOUNT_BALANCE         INTEGER UNSIGNED  NOT NULL,
             TRANSACT_DATE                     DATE  NOT NULL,
@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS WITHDRAWAL (
 );
 
 CREATE TABLE IF NOT EXISTS INVESTMENT (
-            INVESTMENT_ID              INT(20)  NOT NULL AUTO_INCREMENT,
+            INVESTMENT_ID              INT(20)  NOT NULL ,
            TRANSACTION_ID              INT(20)  NOT NULL,
               ACCOUNT_NUM               VARCHAR(10)  NOT NULL,
                                     PRIMARY KEY (INVESTMENT_ID),
